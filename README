@@ -1,0 +1,298 @@
+Certainly! Here's an example of a detailed README file for your FastAPI project, including technologies used, endpoint descriptions with examples, and instructions:
+FastAPI Astronomy API
+Overview
+
+This project is a FastAPI-based RESTful API for astronomy-related information, including moon phases, celestial coordinates, and celestial objects.
+Technologies Used
+
+    FastAPI: FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
+    uvicorn: ASGI server implementation, used to run the FastAPI application.
+    astropy: A library for astronomy in Python, used for celestial coordinate calculations.
+    astroquery: A collection of tools for querying astronomical web forms and databases.
+    ephem: A Python library for performing high-precision astronomy computations.
+
+Setup Instructions
+
+    Installation:
+
+pip install fastapi uvicorn astropy astroquery ephem
+
+Run the Application:
+
+css
+
+    uvicorn main:app --reload
+
+        main should be replaced with the filename where your FastAPI app is defined (main.py in this case).
+        --reload enables auto-reloading for development.
+
+    Access the API:
+        By default, the API runs at http://localhost:8000.
+
+Endpoints
+Moon Phases
+Endpoint: /moon/phases/{date}/{city}
+
+    Description: Retrieves the moon phase for a specific date and city.
+    Parameters:
+        date (str): Date in YYYY-MM-DD format.
+        city (str): City name for geolocation.
+    Example:
+        Request: POST /moon/phases/2024-07-01/New York
+        Response:
+
+        json
+
+        {
+            "New York": {
+                "coordinates": {
+                    "latitude": 40.7128,
+                    "longitude": -74.006
+                },
+                "moon_phase": {
+                    "date": "2024-07-01",
+                    "illuminated_fraction": "Waxing Gibbous"
+                }
+            }
+        }
+
+Celestial Coordinates
+Endpoint: /astronomy/coordinates/region/{ra}/{dec}
+
+    Description: Retrieves the constellation region for given Right Ascension (RA) and Declination (Dec) coordinates.
+    Parameters:
+        ra (float): Right Ascension in degrees.
+        dec (float): Declination in degrees.
+    Example:
+        Request: POST /astronomy/coordinates/region/120.0/45.0
+        Response:
+
+        json
+
+        {
+            "right_ascension": 120.0,
+            "declination": 45.0,
+            "region": "Vir"
+        }
+
+Endpoint: /astronomy/coordinates/objects/{ra}/{dec}
+
+    Description: Retrieves celestial objects within a 1 arcsecond radius of given RA and Dec coordinates.
+    Parameters:
+        ra (float): Right Ascension in degrees.
+        dec (float): Declination in degrees.
+    Example:
+        Request: POST /astronomy/coordinates/objects/150.0/30.0
+        Response:
+
+        json
+
+        {
+            "region": "Vir",
+            "right_ascension": 150.0,
+            "declination": 30.0,
+            "objects": ["HD 117618", "HD 117649", "HD 117692"]
+        }
+
+Endpoint: /astronomy/coordinates/start_object/{ra}/{dec}
+
+    Description: Retrieves the main star or object name at a specific RA and Dec coordinate.
+    Parameters:
+        ra (float): Right Ascension in degrees.
+        dec (float): Declination in degrees.
+    Example:
+        Request: POST /astronomy/coordinates/start_object/180.0/0.0
+        Response:
+
+        json
+
+        {
+            "right_ascension": 180.0,
+            "declination": 0.0,
+            "star_name": "Sagittarius A*"
+        }
+
+Celestial Object Query
+Endpoint: /celestial_objects/{object_name}
+
+    Description: Retrieves detailed information about a celestial object by its name.
+    Parameters:
+        object_name (str): Name of the celestial object to query.
+    Example:
+        Request: POST /celestial_objects/NGC 224
+        Response:
+
+        json
+
+{
+    "object_name": "NGC 224",
+    "data": [
+        {
+            "MAIN_ID": "M 31",
+            "RA": "00 42 44.330",
+            "DEC": "+41 16 07.50",
+            "RA_PREC": 7,
+            "DEC_PREC": 7,
+            "COO_ERR_MAJA": 0.0,
+            "COO_ERR_MINA": 0.0,
+            "COO_ERR_ANGLE": 0.0,
+            "COO_QUAL": "A",
+            "COO_WAVELENGTH": "R"
+        }
+    ]
+}
+
+
+
+
+
+
+## EM PORTUGUES
+
+
+
+
+
+
+API de Astronomia com FastAPI
+Visão Geral
+
+Este projeto é uma API RESTful baseada em FastAPI para informações relacionadas à astronomia, incluindo fases da lua, coordenadas celestes e objetos celestiais.
+Tecnologias Utilizadas
+
+    FastAPI: FastAPI é um framework web moderno e de alto desempenho para construir APIs com Python 3.7+ baseado em dicas de tipo padrão do Python.
+    uvicorn: Implementação de servidor ASGI, utilizado para executar a aplicação FastAPI.
+    astropy: Biblioteca para astronomia em Python, utilizada para cálculos de coordenadas celestes.
+    astroquery: Conjunto de ferramentas para consulta a formulários web e bancos de dados astronômicos.
+    ephem: Biblioteca Python para realizar cálculos de astronomia de alta precisão.
+
+Instruções de Configuração
+
+    Instalação:
+
+pip install fastapi uvicorn astropy astroquery ephem
+
+Executar a Aplicação:
+
+css
+
+    uvicorn main:app --reload
+
+        main deve ser substituído pelo nome do arquivo onde sua aplicação FastAPI está definida (main.py, neste caso).
+        --reload ativa o recarregamento automático para desenvolvimento.
+
+    Acessar a API:
+        Por padrão, a API é acessível em http://localhost:8000.
+
+Endpoints
+Fases da Lua
+Endpoint: /moon/phases/{date}/{city}
+
+    Descrição: Recupera a fase da lua para uma data específica e cidade.
+    Parâmetros:
+        date (str): Data no formato AAAA-MM-DD.
+        city (str): Nome da cidade para geolocalização.
+    Exemplo:
+        Requisição: POST /moon/phases/2024-07-01/Nova York
+        Resposta:
+
+        json
+
+        {
+            "Nova York": {
+                "coordinates": {
+                    "latitude": 40.7128,
+                    "longitude": -74.006
+                },
+                "moon_phase": {
+                    "date": "2024-07-01",
+                    "illuminated_fraction": "Crescente Côncava"
+                }
+            }
+        }
+
+Coordenadas Celestes
+Endpoint: /astronomy/coordinates/region/{ra}/{dec}
+
+    Descrição: Recupera a constelação para coordenadas dadas de Ascensão Reta (RA) e Declinação (Dec).
+    Parâmetros:
+        ra (float): Ascensão Reta em graus.
+        dec (float): Declinação em graus.
+    Exemplo:
+        Requisição: POST /astronomy/coordinates/region/120.0/45.0
+        Resposta:
+
+        json
+
+        {
+            "ascensão reta": 120.0,
+            "declinação": 45.0,
+            "região": "Vir"
+        }
+
+Endpoint: /astronomy/coordinates/objects/{ra}/{dec}
+
+    Descrição: Recupera objetos celestes dentro de um raio de 1 segundo de arco das coordenadas de RA e Dec fornecidas.
+    Parâmetros:
+        ra (float): Ascensão Reta em graus.
+        dec (float): Declinação em graus.
+    Exemplo:
+        Requisição: POST /astronomy/coordinates/objects/150.0/30.0
+        Resposta:
+
+        json
+
+        {
+            "região": "Vir",
+            "ascensão reta": 150.0,
+            "declinação": 30.0,
+            "objetos": ["HD 117618", "HD 117649", "HD 117692"]
+        }
+
+Endpoint: /astronomy/coordinates/start_object/{ra}/{dec}
+
+    Descrição: Recupera o nome principal de uma estrela ou objeto em coordenadas específicas de RA e Dec.
+    Parâmetros:
+        ra (float): Ascensão Reta em graus.
+        dec (float): Declinação em graus.
+    Exemplo:
+        Requisição: POST /astronomy/coordinates/start_object/180.0/0.0
+        Resposta:
+
+        json
+
+        {
+            "ascensão reta": 180.0,
+            "declinação": 0.0,
+            "nome da estrela": "Sagittarius A*"
+        }
+
+Consulta de Objetos Celestes
+Endpoint: /celestial_objects/{object_name}
+
+    Descrição: Recupera informações detalhadas sobre um objeto celeste pelo seu nome.
+    Parâmetros:
+        object_name (str): Nome do objeto celeste para consulta.
+    Exemplo:
+        Requisição: POST /celestial_objects/NGC 224
+        Resposta:
+
+        json
+
+{
+    "nome do objeto": "NGC 224",
+    "dados": [
+        {
+            "MAIN_ID": "M 31",
+            "RA": "00 42 44.330",
+            "DEC": "+41 16 07.50",
+            "PREC_RA": 7,
+            "PREC_DEC": 7,
+            "COO_ERR_MAJA": 0.0,
+            "COO_ERR_MINA": 0.0,
+            "COO_ERR_ANGLE": 0.0,
+            "COO_QUAL": "A",
+            "COO_WAVELENGTH": "R"
+        }
+    ]
+}
